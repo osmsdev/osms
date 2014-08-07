@@ -6,14 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jprnd.osms.model.AuthModel;
 import com.jprnd.osms.services.LoginService;
 
 @Controller
 @RequestMapping(value = SystemResource.URL_PREFIX_SYSTEM)
 public class SystemResource extends AbstractBaseResource {
     static final String URL_PREFIX_SYSTEM = "/api/system";
+    
 
     private static final String API_VERSION = "2.0";
     	
@@ -38,6 +41,22 @@ public class SystemResource extends AbstractBaseResource {
     	System.out.println("CAlling ApiInfo");
     	loginService.dummy();
         return generateOk("{ \"api_version\":\"" + API_VERSION + "\" }");
+    }
+    
+    
+    @RequestMapping(value = AUTHENTICATE, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> authenticate(@RequestParam("username") final String userName, @RequestParam("password") final String password) {
+        try {
+        	
+        	AuthModel model = loginService.login(userName, password);
+        	
+        	return generateOk("{ \"token\":\"" + model.getToken() + "\" }");
+        	 
+        }catch(Exception e){
+        	return generateOk("{ \"error\":\" Invalid username or password. \" }");
+        }
+
+       
     }
 
     /**
