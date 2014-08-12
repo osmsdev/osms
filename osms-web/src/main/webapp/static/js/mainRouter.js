@@ -16,7 +16,8 @@ function( $, Backbone) {
 		  
 		  routes: {
 			//"": "showAccountView",
-			"": "showLoginView"
+			"": "showLoginView",
+			"login" : "showLoginView"
 		  },
 		  
 		  showLoginView: function(){
