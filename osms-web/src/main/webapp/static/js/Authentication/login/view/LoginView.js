@@ -8,7 +8,7 @@ function($, Backbone, _, MainRouter, loginTpl) {
 	var view = Backbone.View.extend({
 		
 		events: {
-			  "click  #submit": "submitLogin",
+			  "click  .login-button": "submitLogin",
 			  "keypress #userName" : "submitName",
 			  "keypress #password" : "submitName"
 		},
@@ -37,24 +37,27 @@ function($, Backbone, _, MainRouter, loginTpl) {
 		 	this.$el.find('#loginSubmit').attr("disabled", true);
 
 		 	var formValues = {
-		 		name: this.$el.find('#email').val(),
+		 		username: this.$el.find('#login').val(),
 		 		password: this.$el.find('#password').val()
 		 	};
-		 	
-		 	window.loaderOn();
 
 		 	$.ajax({
-		 		url: window.config.url_prefix + 'rest/ws/login',
-		 		type:'POST',
+		 		type:'post',
+		 		cache:false,
+		 		url: window.location.hash + 'rest/api/system/authenticate',	
+		 		contentType :"application/x-www-form-urlencoded",
 		 		dataType:"json",
-		 		data: JSON.stringify(formValues),
+		 		data: formValues,
 		 		success: function (data) {
-		 				/*var user =  new UserModel(data.data);
-		 				user.initBusinessUnit();
-		 				user.saveLocalStorage();
-		 				LocalStorage.set('bu', user.get('businessUnit'));
-		 				window.loaderOff();*/	
-		 				MainRouter.navigate('home', true);
+		 			    console.log(data);
+		 			    if(data.error != undefined){
+		 			    	console.log(data.error);
+		 			    }else{
+		 			    	console.log('sucess');
+		 			    	var route = new MainRouter();
+				 			route.navigate('home', true);
+		 			    }
+		 			    
 		 		},
 		 		error: function(error) {
 	            	// TODO

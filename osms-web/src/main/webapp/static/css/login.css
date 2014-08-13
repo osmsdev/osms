@@ -179,7 +179,13 @@ label {
   font-weight: 100;
   letter-spacing: 1px;
 }
-
+.errorMsg {
+  padding-left: 100px;
+  font-size: 13px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  display:none;
+}
 .login-submit {
   position: absolute;
   top: 12px;
