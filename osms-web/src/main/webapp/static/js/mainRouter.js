@@ -1,6 +1,7 @@
 define( [ 'jquery', 
-          'backbone'],
-function( $, Backbone) {
+          'backbone',
+          'LeftNavigation/views/LeftNavigationView'],
+function( $, Backbone, LeftNavigationView) {
 	
 	var MainRouter = Backbone.Router.extend({
 		
@@ -17,7 +18,8 @@ function( $, Backbone) {
 		  routes: {
 			//"": "showAccountView",
 			"": "showLoginView",
-			"login" : "showLoginView"
+			"login" : "showLoginView",
+			"home" : "showDashBoardView"
 		  },
 		  
 		  showLoginView: function(){
@@ -38,15 +40,8 @@ function( $, Backbone) {
 		  },
 		  
 		  showDashBoardView: function(){
-			  $(".FixedHeader_Header").remove();
-			  RefObj.set("dashboard", new DashBoardView());
-			  $("#content").html(RefObj.get("dashboard").$el);
-			  
-			  $(".mainLink li a").removeClass('active');
-			  $(".mainLink li:nth-child(1) a").addClass('active');
-			  console.log($("#content").find("#advname"));
-			 /* setTimeout(function(){$("#advname").html(i18next.t("app.missionCtrl"));}, 1000);*/
-			  this.reportingView = undefined;
+			  var leftNavigationView = new LeftNavigationView();
+			  $('#content').html(leftNavigationView.$el);
 		  }
 		  
 		});
