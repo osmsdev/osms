@@ -16,7 +16,8 @@ define([
       this.render();
     },
 
-    render: function(){     
+    render: function(){
+      $("body").unblock();	
       this.$el.empty().html("");
       this.$el.append(_.template(leftNavigationTpl));
     },

@@ -52,7 +52,11 @@ function($, Backbone, _, MainRouter, loginTpl) {
 		 			    console.log(data);
 		 			    if(data.error != undefined){
 		 			    	console.log(data.error);
+		 			    	that.$('.errorMsg').show();
+		 			    	that.$('.errorMsg').text(data.error);
 		 			    }else{
+		 			    	that.$('.errorMsg').hide();
+		 			    	that.$('.errorMsg').text("");
 		 			    	console.log('sucess');
 		 			    	var route = new MainRouter();
 				 			route.navigate('home', true);
