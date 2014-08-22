@@ -1,0 +1,58 @@
+<bean:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:bean="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+ 						http://www.springframework.org/schema/security 
+ 						http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<global-method-security secured-annotations="enabled"
+		pre-post-annotations="enabled">
+		<expression-handler ref="expressionHandler" />
+	</global-method-security>
+
+	<bean:bean id="expressionHandler"
+		class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+	</bean:bean>
+
+	<http create-session="stateless"
+        entry-point-ref="restServicesEntryPoint" authentication-manager-ref="restAuthManager">
+        <intercept-url pattern="/rest/api/system/authenticate" />
+        
+        <intercept-url pattern="/rest/**" access="ROLE_ADMIN" />
+        <form-login default-target-url="/rest/api/system/authenticate" authentication-success-handler-ref="restServicesSuccessHandler1" />
+        <access-denied-handler ref="myAuthenticationAccessDeniedHandler" />
+        <http-basic />
+    </http>
+    
+	<bean:bean id="restServicesFilter"
+		class="com.jprnd.osms.security.RestUsernamePasswordAuthenticationFilter">
+		<bean:property name="postOnly" value="true" />
+		<bean:property name="authenticationManager" ref="restAuthManager" />
+		<bean:property name="authenticationSuccessHandler" ref="restServicesSuccessHandler" />
+		<bean:property name="authenticationFailureHandler" ref="restServicesFailureHandler" />
+	</bean:bean>
+
+	<bean:bean id="restServicesEntryPoint"  class="com.jprnd.osms.security.RestAuthenticationEntryPoint" />
+
+	<bean:bean id="restServicesSuccessHandler" class="com.jprnd.osms.security.RestRequestAwareAuthenticationSuccessHandler" />
+	<bean:bean id="restServicesFailureHandler"   class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+
+	<bean:bean id="restServicesSuccessHandler1" class="com.jprnd.osms.security.RestAuthenticationSuccessHandler" /> 
+ <bean:bean id="myAuthenticationAccessDeniedHandler"
+        class="com.jprnd.osms.security.RestAuthenticationAccessDeniedHandler" />
+ 
+	
+	<authentication-manager alias="restAuthManager" >
+		<!-- <authentication-provider ref="restAuthenticationProvider" /> -->
+		<authentication-provider user-service-ref="restAuthenticationService" />
+	</authentication-manager>
+
+	<bean:bean id="restAuthenticationProvider" class="com.jprnd.osms.security.RestAuthenticationProvider">
+		<bean:property name="passwordEncoder" ref="passwordEncoder" />
+		<bean:property name="userDetailsService" ref="restAuthenticationService" />
+	</bean:bean>
+	
+	<bean:bean id="restAuthenticationService" class="com.jprnd.osms.security.RestAuthenticationServiceImpl" />
+	<bean:bean id="passwordEncoder"	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+</bean:beans>
