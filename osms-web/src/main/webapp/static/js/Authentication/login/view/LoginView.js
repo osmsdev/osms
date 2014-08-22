@@ -33,9 +33,19 @@ function($, Backbone, _, MainRouter, loginTpl) {
 		submitLogin: function(e){
 		 	var that = this;
 		 	e.preventDefault();
-
-		 	this.$el.find('#loginSubmit').attr("disabled", true);
-
+            
+		 	if(this.$el.find('#login').val() == ""){
+		 		this.$el.find('.errorMsg').show();
+			    this.$el.find('.errorMsg').text('Please Enter Username');
+			    return;
+		 	}
+		 	
+		 	if(this.$el.find('#password').val() == ""){
+		 		this.$el.find('.errorMsg').show();
+			    this.$el.find('.errorMsg').text('Please Enter Password');
+			    return;
+		 	}
+		 	
 		 	var formValues = {
 		 		username: this.$el.find('#login').val(),
 		 		password: this.$el.find('#password').val()
