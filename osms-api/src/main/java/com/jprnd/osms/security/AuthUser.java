@@ -5,9 +5,30 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.jprnd.osms.model.UserModel;
+
 public class AuthUser implements UserDetails {
 
+	private String userName;
+	private String password;
+	private String email;
+	private String firstName;
+	private String lastName;
+	private String token;
 	
+	
+	
+	public AuthUser(UserModel model){
+		this.password = model.getPassword();
+		this.userName = model.getUsername();
+		this.email = model.getEmail();
+		this.firstName = model.getFirstName();
+		this.lastName = model.getLastName();
+	}
+	
+	public String getFirstName(){
+		return this.firstName;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -16,32 +37,32 @@ public class AuthUser implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return null;
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
-		return null;
+		return this.userName;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 
 	

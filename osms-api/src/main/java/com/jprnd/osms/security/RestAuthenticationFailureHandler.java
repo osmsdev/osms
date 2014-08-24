@@ -17,6 +17,19 @@ public class RestAuthenticationFailureHandler implements
 			HttpServletResponse response, AuthenticationException exception)
 			throws IOException, ServletException {
 		System.out.println("onAuthenticationFailure");
+		
+		/*response.setContentType("application/json");
+		response.sendError(401, "Authentication Failed: " );*/
+		
+		 response.setContentType("application/json");
+		 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		 response.getOutputStream().println("{\"status\":\"fail\" ,  \"error\": \"" + exception.getMessage() + "\" }");
+
+		    
+		//response.getWriter().print("{\"responseCode\":\"Failed\"}");
+        //response.getWriter().flush();
+        
+		
 	}
 
 }

@@ -23,7 +23,8 @@ public class RestUsernamePasswordAuthenticationFilter extends
 
         String username = request.getParameter(SPRING_SECURITY_FORM_USERNAME_KEY);
         String password = request.getParameter(SPRING_SECURITY_FORM_PASSWORD_KEY);
-
+System.out.println("username " + username );
+System.out.println("password " + password );
         if (username == null) {
             username = "";
         }

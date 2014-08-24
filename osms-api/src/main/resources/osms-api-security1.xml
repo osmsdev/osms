@@ -16,7 +16,8 @@
 
 	<http auto-config="false"
 		entry-point-ref="restServicesEntryPoint">
-		<intercept-url pattern="/api/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/api/system/authenticate"  />
+		<intercept-url pattern="/rest/api/**"  />
 		<custom-filter position="FORM_LOGIN_FILTER" ref="restServicesFilter"  />
 	</http>
 
@@ -25,14 +26,16 @@
 		<bean:property name="filterProcessesUrl" value="/rest/api/auth" />
 		<bean:property name="postOnly" value="true" />
 		<bean:property name="authenticationManager" ref="restAuthManager" />
-		<bean:property name="authenticationSuccessHandler" ref="restServicesSuccessHandler" />
-		<bean:property name="authenticationFailureHandler" ref="restServicesFailureHandler" />
+		<bean:property name="authenticationSuccessHandler" ref="restServicesSuccessHandler1" />
+		<bean:property name="authenticationFailureHandler" ref="restServicesFailureHandler1" />
 	</bean:bean>
 
 	<bean:bean id="restServicesEntryPoint"  class="com.jprnd.osms.security.RestAuthenticationEntryPoint" />
 	<bean:bean id="restServicesSuccessHandler1" class="com.jprnd.osms.security.RestAuthenticationSuccessHandler" />
 	<bean:bean id="restServicesSuccessHandler" class="com.jprnd.osms.security.RestRequestAwareAuthenticationSuccessHandler" />
+	
 	<bean:bean id="restServicesFailureHandler"   class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+    <bean:bean id="restServicesFailureHandler1"   class="com.jprnd.osms.security.RestAuthenticationFailureHandler"/>
  
 	
 	<authentication-manager alias="restAuthManager" >
@@ -46,6 +49,7 @@
 	</bean:bean>
 	
 	<bean:bean id="restAuthenticationService" class="com.jprnd.osms.security.RestAuthenticationServiceImpl" />
-	<bean:bean id="passwordEncoder"	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<!-- <bean:bean id="passwordEncoder"	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
+	<bean:bean id="passwordEncoder"	class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
 
 </bean:beans>

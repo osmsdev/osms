@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.jprnd.osms.model.AuthModel;
+import com.jprnd.osms.model.UserModel;
 import com.jprnd.osms.services.LoginService;
 
 
@@ -18,10 +18,20 @@ public class RestAuthenticationServiceImpl implements UserDetailsService{
 			throws UsernameNotFoundException {
 		//TODO  - 
 		System.out.println("loadUserByUsername");
+		UserModel model = null;
+		try {
+			model = loginService.findUser(userName);
+		} catch (Exception e) {
+			throw new UsernameNotFoundException("User not found.");
+		}
 		
-		//AuthModel model = loginService.login(userName);
+		if(model == null){
+			throw new UsernameNotFoundException("User not found.");
+		}
 		
-		return new AuthUser();
+		AuthUser user = new AuthUser(model);
+		
+		return user;
 	}
 
 	

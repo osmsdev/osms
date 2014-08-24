@@ -14,9 +14,21 @@ public class RestAuthenticationSuccessHandler implements
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest arg0,
-			HttpServletResponse arg1, Authentication arg2) throws IOException,
+			HttpServletResponse response, Authentication auth) throws IOException,
 			ServletException {
 		System.out.println("onAuthenticationSuccess");
+		/*response.getWriter().print("{\"responseCode\":\"SUCCESS\"}");
+        response.getWriter().flush();*/
+        
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
+		
+		//TODO - GEnerate Token
+		
+		String token = "jflskfjklaflkasflksafkla";
+		
+		response.getOutputStream().println("{\"status\":\"success\" , \"token\":\"" + token + "\" }");
+        
 	}
 
 }

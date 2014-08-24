@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jprnd.osms.dao.LoginDao;
 import com.jprnd.osms.model.AuthModel;
+import com.jprnd.osms.model.UserModel;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -25,6 +26,16 @@ public class LoginServiceImpl implements LoginService{
 			return new AuthModel("lakflsfljl12j1j23jkljlsdjfs");
 		}
 		throw new Exception();
+	}
+
+	@Override
+	public UserModel findUser(String userName) throws Exception {
+		UserModel model = new UserModel();
+		model.setFirstName("Admin");
+		model.setUsername("admin");
+		model.setPassword("admin123");
+		model.setEmail("admin@jprnd.com");
+		return model;
 	}
 
 	

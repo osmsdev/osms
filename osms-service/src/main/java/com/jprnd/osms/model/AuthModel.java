@@ -2,7 +2,8 @@ package com.jprnd.osms.model;
 
 public class AuthModel {
 
-	String token;
+	private String token;
+	
 	
 	public AuthModel(String token){
 		this.token =token;
