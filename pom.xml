@@ -17,7 +17,7 @@
 		<jdk.version>1.6</jdk.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
-		<hibernate.version>4.3.6-Final</hibernate.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 		<velocity.version>1.6.3</velocity.version>
 		<javax.mail.version>1.4.6</javax.mail.version>
 		<log4j.version>1.2.14</log4j.version>
@@ -83,33 +83,6 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
-		<repository>
-			<id>archiva.snapshots</id>
-			<name>shared-repository</name>
-			<url>${shared-artifactory.url}/repository/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>archiva.releases</id>
-			<name>shared-repository</name>
-			<url>${shared-artifactory.url}/repository/releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>ZK EVAL</id>
-			<name>ZK Evaluation Repository</name>
-			<url>http://mavensync.zkoss.org/eval</url>
 		</repository>
 	</repositories>
 

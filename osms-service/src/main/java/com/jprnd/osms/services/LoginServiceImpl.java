@@ -25,6 +25,7 @@ public class LoginServiceImpl implements LoginService{
 		if("admin".equalsIgnoreCase(username) && "admin123".equals(password)){
 			return new AuthModel("lakflsfljl12j1j23jkljlsdjfs");
 		}
+		loginDao.login("admin", "admin");
 		throw new Exception();
 	}
 
