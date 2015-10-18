@@ -6,6 +6,7 @@
 	<artifactId>osms</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	
 	<modules>
 		<module>osms-integration</module>
 		<module>osms-service</module>
@@ -14,6 +15,10 @@
 	</modules>
 
 	<properties>
+		<osms.api.version>1.0-SNAPSHOT</osms.api.version>
+		<osms.integration.version>1.0-SNAPSHOT</osms.integration.version>
+		<osms.service.version>1.0-SNAPSHOT</osms.service.version>
+		
 		<jdk.version>1.6</jdk.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
@@ -113,7 +118,23 @@
 	</build>
 
 	<dependencyManagement>
-		<dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>com.jprnd.osms</groupId>
+			<artifactId>osms-api</artifactId>
+			<version>${osms.api.version}</version>
+		</dependency>
+
+<dependency>
+			<groupId>com.jprnd.osms</groupId>
+			<artifactId>osms-integration</artifactId>
+			<version>${osms.integration.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jprnd.osms</groupId>
+			<artifactId>osms-service</artifactId>
+			<version>${osms.service.version}</version>
+		</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
