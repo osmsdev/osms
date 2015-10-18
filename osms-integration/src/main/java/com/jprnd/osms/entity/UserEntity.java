@@ -22,11 +22,11 @@ public class UserEntity {
 	private int UserType;
 	@Column(name = "IS_ACTIVE")
 	private Boolean isActive;
-	@Column(name = "CFREATED_DATE")
+	@Column(name = "CREATED_AT")
 	private Date createdAt;
-	@Column(name = "CFREATED_BY")
+	@Column(name = "CREATED_BY")
 	private String createdBy;
-	@Column(name = "MODIFIED_DATE")
+	@Column(name = "MODIFIED_AT")
 	private Date modifiedAt;
 	@Column(name = "MODIFIED_BY")
 	private String modifiedBy;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jprnd.osms.dao.LoginDao;
+import com.jprnd.osms.entity.UserEntity;
 import com.jprnd.osms.model.AuthModel;
 import com.jprnd.osms.model.UserModel;
 
@@ -25,8 +26,11 @@ public class LoginServiceImpl implements LoginService{
 		if("admin".equalsIgnoreCase(username) && "admin123".equals(password)){
 			return new AuthModel("lakflsfljl12j1j23jkljlsdjfs");
 		}
-		loginDao.login("admin", "admin");
-		throw new Exception();
+		UserEntity user = loginDao.login(username, password);
+		if(user != null){
+			return new AuthModel("lakflsfljl12j1j23jkljlsdjfs"); //TODO
+		}
+		throw new Exception("User not found."); //TODO
 	}
 
 	@Override

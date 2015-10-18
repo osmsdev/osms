@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.jprnd.osms.entity.UserEntity;
 
-@Service
+@Repository
 public class LoginDaoImpl implements LoginDao{
 	
 	 
@@ -28,13 +28,17 @@ public class LoginDaoImpl implements LoginDao{
 	}
 
 	@Override
-	public List<UserEntity> login(String userName, String password) {
+	public UserEntity login(String userName, String password) {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq("userName", userName));
 		criteria.add(Restrictions.eq("password", password));
 		List<UserEntity> userList = criteria.list();
-		return userList;
+		if(userList != null && !userList.isEmpty()){
+			return userList.get(0);
+		}
+			
+		return null;
 	}
 
 }
