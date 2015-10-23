@@ -6,7 +6,7 @@
 	<artifactId>osms</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>osms-integration</module>
 		<module>osms-service</module>
@@ -18,7 +18,6 @@
 		<osms.api.version>1.0-SNAPSHOT</osms.api.version>
 		<osms.integration.version>1.0-SNAPSHOT</osms.integration.version>
 		<osms.service.version>1.0-SNAPSHOT</osms.service.version>
-		
 		<jdk.version>1.6</jdk.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
@@ -34,13 +33,11 @@
 		<axis.version>1.4</axis.version>
 		<commons.codec>1.3</commons.codec>
 		<commons-io.version>2.4</commons-io.version>
-		<sl4j.version>1.5.10</sl4j.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<gson.version>2.2.2</gson.version>
 		<jackson.version>1.9.4</jackson.version>
 		<commons.dbcp2.version>2.0.1</commons.dbcp2.version>
 		<commons.pool2.version>2.2</commons.pool2.version>
-		<slf4j.version>1.5.6</slf4j.version>
 		<javassist.version>3.12.1.GA</javassist.version>
 		<junit.version>4.11</junit.version>
 		<commons.logging.version>1.1.1</commons.logging.version>
@@ -51,6 +48,8 @@
 		<persistence.api.version>1.0.2</persistence.api.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<mysql.connector.version>5.1.6</mysql.connector.version>
+		<slf4j.version>1.6.4</slf4j.version>
+ 		<logback.version>1.0.1</logback.version>
 	</properties>
 
 	<repositories>
@@ -118,23 +117,23 @@
 	</build>
 
 	<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>com.jprnd.osms</groupId>
-			<artifactId>osms-api</artifactId>
-			<version>${osms.api.version}</version>
-		</dependency>
+		<dependencies>
+			<dependency>
+				<groupId>com.jprnd.osms</groupId>
+				<artifactId>osms-api</artifactId>
+				<version>${osms.api.version}</version>
+			</dependency>
 
-<dependency>
-			<groupId>com.jprnd.osms</groupId>
-			<artifactId>osms-integration</artifactId>
-			<version>${osms.integration.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jprnd.osms</groupId>
-			<artifactId>osms-service</artifactId>
-			<version>${osms.service.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>com.jprnd.osms</groupId>
+				<artifactId>osms-integration</artifactId>
+				<version>${osms.integration.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.jprnd.osms</groupId>
+				<artifactId>osms-service</artifactId>
+				<version>${osms.service.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
@@ -248,11 +247,6 @@
 				<version>${commons.pool2.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>${javassist.version}</version>
@@ -336,12 +330,6 @@
 				<version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${sl4j.version}</version>
-				<optional>true</optional>
-			</dependency>
-			<dependency>
 				<groupId>c3p0</groupId>
 				<artifactId>c3p0</artifactId>
 				<version>${c3p0.version}</version>
@@ -362,6 +350,24 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.connector.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>

@@ -1,5 +1,7 @@
 package com.jprnd.osms.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,13 @@ import com.jprnd.osms.services.LoginService;
 @Controller
 @RequestMapping(value = SystemResource.URL_PREFIX_SYSTEM)
 public class SystemResource extends AbstractBaseResource {
-    static final String URL_PREFIX_SYSTEM = "/api/system";
+    
+	private static final Logger logger = LoggerFactory.getLogger(SystemResource.class);
+	
+	 
+
+	
+	static final String URL_PREFIX_SYSTEM = "/api/system";
     
 
     private static final String API_VERSION = "2.0";
@@ -46,16 +54,17 @@ public class SystemResource extends AbstractBaseResource {
     
     @RequestMapping(value = AUTHENTICATE, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> authenticate(@RequestParam("username") final String userName, @RequestParam("password") final String password) {
-        try {
+    	logger.debug("start--->" + "authenticate" + " params-->" + userName,password);
+    	try {
         	
         	AuthModel model = loginService.login(userName, password);
-        	
+        	logger.debug("End--->" + " authenticate" + " params-->" + userName + password );
         	return generateOk("{ \"token\":\"" + model.getToken() + "\" }");
         	 
         }catch(Exception e){
         	return generateOk("{ \"error\":\" Invalid username or password. \" }");
         }
-
+    	
        
     }
 
