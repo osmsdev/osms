@@ -35,7 +35,7 @@
 		<commons-io.version>2.4</commons-io.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<gson.version>2.2.2</gson.version>
-		<jackson.version>1.9.4</jackson.version>
+		<jackson.version>2.6.3</jackson.version>
 		<commons.dbcp2.version>2.0.1</commons.dbcp2.version>
 		<commons.pool2.version>2.2</commons.pool2.version>
 		<javassist.version>3.12.1.GA</javassist.version>
@@ -340,11 +340,11 @@
 				<artifactId>gson</artifactId>
 				<version>${gson.version}</version>
 			</dependency>
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>${jackson.version}</version>
-			</dependency>
+			</dependency> -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
@@ -367,6 +367,17 @@
 				<artifactId>logback-core</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 
 
 		</dependencies>

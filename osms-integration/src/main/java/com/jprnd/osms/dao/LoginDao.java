@@ -6,6 +6,7 @@ import com.jprnd.osms.entity.UserEntity;
 
 @Service
 public interface LoginDao {
-	boolean dummy();
 	UserEntity login(String userName, String password);
+
+	UserEntity findUser(String username);
 }

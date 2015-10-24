@@ -5,31 +5,41 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
 public class UserEntity {
+	
 	@Id
 	@Column(name = "USER_ID")
 	private Integer userId;
+	
 	@Column(name = "USER_NAME")
 	private String userName;
+	
 	@Column(name = "PASSWORD")
 	private String password;
+	
 	@Column(name = "USER_TYPE")
 	private int UserType;
+	
 	@Column(name = "IS_ACTIVE")
 	private Boolean isActive;
+	
 	@Column(name = "CREATED_AT")
 	private Date createdAt;
+	
 	@Column(name = "CREATED_BY")
 	private String createdBy;
+	
 	@Column(name = "MODIFIED_AT")
 	private Date modifiedAt;
+	
 	@Column(name = "MODIFIED_BY")
 	private String modifiedBy;
+	
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -78,6 +88,33 @@ public class UserEntity {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserEntity other = (UserEntity) obj;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
+	}
+	
 	
 	
 	

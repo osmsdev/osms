@@ -1,11 +1,13 @@
 package com.jprnd.osms.model;
 
 public class UserModel {
+	
 	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
+	
 	public String getUsername() {
 		return username;
 	}
