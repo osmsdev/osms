@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jprnd.osms.dao.LoginDao;
 import com.jprnd.osms.entity.UserEntity;
@@ -13,6 +14,8 @@ import com.jprnd.osms.model.ApiInfoModel;
 import com.jprnd.osms.model.AuthModel;
 import com.jprnd.osms.model.UserModel;
 
+
+@Transactional
 @Service
 public class LoginServiceImpl extends BaseService implements LoginService{
 
