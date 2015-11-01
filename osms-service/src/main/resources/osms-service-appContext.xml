@@ -12,19 +12,9 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
    <import resource="classpath:osms-integration-appContext.xml" />
- 
-  <!--  <bean
-    id="propertiesConfig"
-    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-      <list>
-        <value>classpath:/sms_api/app.properties</value>
-      </list>
-    </property>
-  </bean> -->
   
   <mvc:annotation-driven />
-  <context:component-scan base-package="com.jprnd.osms.services" />
+  <context:component-scan base-package="com.jprnd.osms.services,com.jprnd.osms.aspectj" />
 
 </beans>
 
