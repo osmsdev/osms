@@ -4,14 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jprnd.osms.api.req.AuthRequest;
 import com.jprnd.osms.api.util.ApiErrorCode;
 import com.jprnd.osms.api.util.ApiErrorUtil;
 import com.jprnd.osms.exception.AuthenticationException;
+import com.jprnd.osms.exception.RequiredValidationException;
 import com.jprnd.osms.model.AuthModel;
 import com.jprnd.osms.model.ViewModel;
 import com.jprnd.osms.services.LoginService;
@@ -25,20 +27,22 @@ public class AuthenticationController extends AbstractBaseController  {
     private LoginService loginService;
     
     @RequestMapping(value = AUTHENTICATE, method = RequestMethod.POST)
-    public ViewModel authenticate(@RequestParam("username") final String userName, @RequestParam("password") final String password) {
-    	logger.debug("start--->" + "authenticate" + " params-->" + userName +", "+ password);
+    public ViewModel authenticate(@RequestBody AuthRequest input) {
+    	logger.debug("start--->" + "authenticate " );
     	try {
     		
-    		checkPreCondition(userName, password);
+    		checkPreCondition(input.getUsername(), input.getPassword());
     		
-        	AuthModel model = loginService.login(userName, password);
+        	AuthModel model = loginService.login(input.getUsername(), input.getPassword());
         	
-        	logger.debug("End--->" + " authenticate" + " params-->" +  userName +", "+ password );
+        	logger.debug("End--->" + " authenticate" + " params-->" );
         	
         	return model;
         	
     	}catch(AuthenticationException ae){
     		return ApiErrorUtil.buildErrorModel(ApiErrorCode.AuthError,ae.getMessage());
+    	}catch(RequiredValidationException ae){
+    		return ApiErrorUtil.buildErrorModel(ApiErrorCode.ValidationError,ae.getMessage());
         }catch(Exception e){
         	return ApiErrorUtil.buildErrorModel(ApiErrorCode.SystemError,getMessage("error.system.error.message"));
         }
@@ -46,9 +50,9 @@ public class AuthenticationController extends AbstractBaseController  {
        
     }
 	 
-	 private void checkPreCondition(String username, String password){
+	 private void checkPreCondition(String username, String password) throws RequiredValidationException{
 		 if( StringUtils.isEmpty(username) || StringUtils.isEmpty(password) ){
-			 throw new IllegalArgumentException(getMessage("error.username.password.required"));
+			 throw new RequiredValidationException(getMessage("error.username.password.required"));
 		 }
 	 }
 }
